@@ -1,0 +1,30 @@
+.display-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  min-height: 3.6rem;
+  width: 17.5rem;
+  margin: 0 auto;
+  padding: 0.5rem;
+  font-family: var(--ff-digital);
+  font-weight: var(--fw-bold);
+  letter-spacing: 2px;
+  word-spacing: 5px;
+  word-wrap: break-word;
+  word-break: break-all;
+  background-color: var(--color-dark);
+  border: 0.15rem solid var(--color-4);
+  filter: drop-shadow(0.2rem 0.2rem 0.3rem var(--color-dark));
+  border-radius: 0.5rem;
+}
+
+.display--expression {
+  font-size: 0.8rem;
+  color: var(--color-light-gray);
+}
+
+.display--current {
+  font-size: 1rem;
+  color: var(--color-light-gray);
+}

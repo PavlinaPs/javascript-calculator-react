@@ -1,0 +1,29 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20rem;
+  padding: 1rem;
+  background-image: linear-gradient(
+    to top,
+    #5e636b,
+    #74798e,
+    #918fb1,
+    #b7a3d1,
+    #e4b5ec
+  );
+  border: 5px solid #e4b5ec;
+  border-radius: 10px;
+  filter: drop-shadow(0.2rem 0.2rem 0.3rem var(--color-dark));
+}
+
+footer {
+  margin-top: 0.7rem;
+  font-size: 0.7rem;
+  color: var(--color-dark);
+  text-align: center;
+}
+
+a {
+  color: var(--color-dark);
+}

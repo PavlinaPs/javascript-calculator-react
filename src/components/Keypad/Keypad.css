@@ -1,0 +1,50 @@
+.keypad-container {
+  display: grid;
+  grid-template-columns: repeat(4, 4rem);
+  gap: 0.5rem;
+  margin: 1rem auto 0;
+}
+
+.button {
+  display: inline;
+  font: inherit;
+  width: 4rem;
+  height: 3rem;
+  font-weight: var(--fw-bold);
+  border: 0.1rem solid var(--color-4);
+  border-radius: 0.4rem;
+  box-shadow: 0.1rem 0.1rem 0.2rem var(--color-dark);
+  filter: drop-shadow(0.2rem 0.2rem 0.3rem var(--color-dark));
+  cursor: pointer;
+}
+
+.button:focus {
+  filter: none;
+}
+
+.button--clear {
+  background-color: var(--color-3);
+  grid-column: span 2;
+  width: 8.5rem;
+}
+
+.button--zero {
+  background-color: var(--color-light);
+  grid-column: span 2;
+  width: 8.5rem;
+}
+
+.button--equals {
+  background-color: var(--color-1);
+  grid-row: span 2;
+  height: 6.5rem;
+}
+
+.button--operator {
+  background-color: var(--color-2);
+}
+
+.button--number,
+.button--decimal {
+  background-color: var(--color-light-gray);
+}
