@@ -1,3 +1,9 @@
+.title {
+  font-size: var(--fs-title);
+  text-align: center;
+  word-spacing: 0.3rem;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -15,15 +21,4 @@
   border: 5px solid #e4b5ec;
   border-radius: 10px;
   filter: drop-shadow(0.2rem 0.2rem 0.3rem var(--color-dark));
-}
-
-footer {
-  margin-top: 0.7rem;
-  font-size: 0.7rem;
-  color: var(--color-dark);
-  text-align: center;
-}
-
-a {
-  color: var(--color-dark);
 }

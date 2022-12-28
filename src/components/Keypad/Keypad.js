@@ -1,6 +1,6 @@
 import React from "react";
 import "./Keypad.css";
-import { ACTIONS } from "../App/App";
+import ACTIONS from "../../useReducer/actionTypes";
 
 const Keypad = ({ dispatch }) => {
   return (

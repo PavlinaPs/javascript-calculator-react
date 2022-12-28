@@ -10,6 +10,8 @@
   font: inherit;
   width: 4rem;
   height: 3rem;
+  font-family: var(--ff);
+  font-size: var(--fs-keypad);
   font-weight: var(--fw-bold);
   border: 0.1rem solid var(--color-4);
   border-radius: 0.4rem;
