@@ -18,7 +18,7 @@ function reducer(state, actions) {
         return state;
       }
       // adds another digit to an operand, overwrite flag is off
-      if (actions.payload.match(/[\d]/) && !state.overwrite) {
+      if (actions.payload.match(/[\d]/) && state.overwrite === false) {
         return {
           ...state,
           expression: `${state.expression}${actions.payload}`,
