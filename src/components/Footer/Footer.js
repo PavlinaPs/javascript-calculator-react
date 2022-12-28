@@ -15,7 +15,7 @@ const Footer = () => {
         </a>
       </p>
       Coded by &nbsp;
-      <a href="https://pavlinaps.github.io/javascript-calculator-react/">
+      <a href="https://github.com/PavlinaPs/javascript-calculator-react">
         Pavlina Psarsky
       </a>
     </footer>
