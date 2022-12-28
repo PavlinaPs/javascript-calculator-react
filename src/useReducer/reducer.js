@@ -1,7 +1,10 @@
 import ACTIONS from "./actionTypes";
 
-function reducer(state, actions) {
-  switch (actions.type) {
+function reducer(state, { type, payload }) {
+  let editedExpression;
+  let result;
+
+  switch (type) {
     case ACTIONS.CLEAR: {
       return {
         ...state,
@@ -13,42 +16,46 @@ function reducer(state, actions) {
         currentDisplay: "0",
       };
     }
+
     case ACTIONS.DIGIT: {
-      if (actions.payload === "0" && state.currentOperand === "0") {
+      // multiple zeros at the beginning of an operand not allowed
+      if (payload === "0" && state.currentOperand === "0") {
         return state;
       }
       // adds another digit to an operand, overwrite flag is off
-      if (actions.payload.match(/[\d]/) && state.overwrite === false) {
+      if (payload.match(/\d/) && state.overwrite === false) {
         return {
           ...state,
-          expression: `${state.expression}${actions.payload}`,
-          currentOperand: `${state.currentOperand || ""}${actions.payload}`,
-          expressionDisplay: `${state.expression}${actions.payload}`,
-          currentDisplay: `${state.currentOperand || ""}${actions.payload}`,
+          expression: `${state.expression}${payload}`,
+          currentOperand: `${state.currentOperand || ""}${payload}`,
+          expressionDisplay: `${state.expression}${payload}`,
+          currentDisplay: `${state.currentOperand || ""}${payload}`,
         };
       }
 
       // starts a new operand, overwrite flag is on
-      if (actions.payload.match(/[\d]/) && state.overwrite) {
+      if (payload.match(/\d/) && state.overwrite) {
         return {
           ...state,
-          expression: `${state.expression || ""}${actions.payload}`,
-          currentOperand: `${actions.payload}`,
-          expressionDisplay: `${state.expression || ""}${actions.payload}`,
-          currentDisplay: `${actions.payload}`,
+          expression: `${state.expression || ""}${payload}`,
+          currentOperand: `${payload}`,
+          expressionDisplay: `${state.expression || ""}${payload}`,
+          currentDisplay: `${payload}`,
           overwrite: false,
         };
       }
       break;
     }
+
     case ACTIONS.DECIMAL: {
+      // only one decimal allowed
       if (state.currentOperand.indexOf(".") === -1) {
         return {
           ...state,
-          expression: `${state.expression}${actions.payload}`,
-          currentOperand: `${state.currentOperand || ""}${actions.payload}`,
-          expressionDisplay: `${state.expression}${actions.payload}`,
-          currentDisplay: `${state.currentOperand || ""}${actions.payload}`,
+          expression: `${state.expression}${payload}`,
+          currentOperand: `${state.currentOperand || ""}${payload}`,
+          expressionDisplay: `${state.expression}${payload}`,
+          currentDisplay: `${state.currentOperand || ""}${payload}`,
         };
       } else {
         return state;
@@ -60,127 +67,132 @@ function reducer(state, actions) {
       if (
         state.expression.charAt(state.expression.length - 2).match(/[-+*/]/) &&
         state.expression.charAt(state.expression.length - 1).match(/[-+*/]/) &&
-        actions.payload.match(/[+*/]/)
+        payload.match(/[+*/]/)
       ) {
         return {
           ...state,
-          expression: `${state.expression.slice(0, -2)}${actions.payload}`,
-          currentOperand: `${actions.payload}`,
-          expressionDisplay: `${state.expression.slice(0, -2)}${
-            actions.payload
-          }`,
-          currentDisplay: `${actions.payload}`,
+          expression: `${state.expression.slice(0, -2)}${payload}`,
+          currentOperand: `${payload}`,
+          expressionDisplay: `${state.expression.slice(0, -2)}${payload}`,
+          currentDisplay: `${payload}`,
         };
       }
       // previous operator is -, clicked + or * or /
       if (
         state.expression.charAt(state.expression.length - 1).match(/[-]/) &&
-        actions.payload.match(/[+*/]/)
+        payload.match(/[+*/]/)
       ) {
         return {
           ...state,
-          expression: `${state.expression.slice(0, -1)}${actions.payload}`,
-          currentOperand: `${actions.payload}`,
-          expressionDisplay: `${state.expression.slice(0, -1)}${
-            actions.payload
-          }`,
+          expression: `${state.expression.slice(0, -1)}${payload}`,
+          currentOperand: `${payload}`,
+          expressionDisplay: `${state.expression.slice(0, -1)}${payload}`,
           currentDisplay: `${state.currentOperand}`,
         };
       }
       // entering negative number after an operator
       if (
         state.expression.charAt(state.expression.length - 1).match(/[-+*/]/) &&
-        actions.payload.match(/[-]/)
+        payload.match(/-/)
       ) {
         return {
           ...state,
-          expression: `${state.expression}${actions.payload}`,
-          currentOperand: `${actions.payload}`,
-          expressionDisplay: `${state.expression}${actions.payload}`,
-          currentDisplay: `${actions.payload}`,
+          expression: `${state.expression}${payload}`,
+          currentOperand: `${payload}`,
+          expressionDisplay: `${state.expression}${payload}`,
+          currentDisplay: `${payload}`,
         };
       }
       // consecutive operators other than -
       if (
         state.expression.charAt(state.expression.length - 1).match(/[+*/]/) &&
-        actions.payload.match(/[+*/]/)
+        payload.match(/[+*/]/)
       ) {
         return {
           ...state,
-          expression: `${state.expression.slice(0, -1)}${actions.payload}`,
-          currentOperand: `${actions.payload}`,
-          expressionDisplay: `${state.expression.slice(0, -1)}${
-            actions.payload
-          }`,
-          currentDisplay: `${actions.payload}`,
+          expression: `${state.expression.slice(0, -1)}${payload}`,
+          currentOperand: `${payload}`,
+          expressionDisplay: `${state.expression.slice(0, -1)}${payload}`,
+          currentDisplay: `${payload}`,
         };
       }
 
       // result is the first operand of a new operation
       if (
-        actions.payload.match(/[-+*/]/) &&
+        payload.match(/[-+*/]/) &&
         state.operandAfterEval !== "" &&
         state.expression === ""
       ) {
         return {
           ...state,
-          expression: `${state.operandAfterEval}${actions.payload}`,
-          currentOperand: `${state.operandAfterEval}${actions.payload}`,
-          expressionDisplay: `${state.operandAfterEval}${actions.payload}`,
-          currentDisplay: `${state.operandAfterEval}${actions.payload}`,
+          expression: `${state.operandAfterEval}${payload}`,
+          currentOperand: `${state.operandAfterEval}${payload}`,
+          expressionDisplay: `${state.operandAfterEval}${payload}`,
+          currentDisplay: `${state.operandAfterEval}${payload}`,
           operandAfterEval: "",
         };
       }
 
       // to complete an operand
-      if (actions.payload.match(/[-+*/]/)) {
+      if (payload.match(/[-+*/]/)) {
         return {
           ...state,
-          expression: `${state.expression}${actions.payload}`,
-          expressionDisplay: `${state.expression}${actions.payload}`,
-          currentDisplay: `${actions.payload}`,
+          expression: `${state.expression}${payload}`,
+          expressionDisplay: `${state.expression}${payload}`,
+          currentDisplay: `${payload}`,
           overwrite: true,
         };
       }
-
       break;
     }
+
     case ACTIONS.EQUALS: {
-      if (actions.payload === "=") {
-        // if "=" is clicked after an operator
-        if (
-          state.expression
-            .charAt(state.expression.length - 1)
-            .match(/[-+*/]/) &&
-          actions.payload === "="
-        ) {
-          return state;
-        }
-
-        // to fix the issue of two consecutive minuses
-        if (/(--)/.test(state.expression)) {
-          let editedExpression = state.expression.replace(/--/, "+");
-          state.expression = editedExpression;
-        }
-        // eslint-disable-next-line
-        let result = parseFloat(eval(state.expression));
-        // to compensate for JavaScript floats' computation issue
-        let resultRounded = (
-          Math.round(1000000000000 * result) / 1000000000000
-        ).toString();
-        return {
-          ...state,
-          expression: "",
-          overwrite: true,
-          operandAfterEval: resultRounded,
-          expressionDisplay: `${state.expression}${actions.payload}${resultRounded}`,
-          currentDisplay: resultRounded,
-        };
+      // if "=" is clicked after an operator
+      if (
+        state.expression.charAt(state.expression.length - 1).match(/[-+*/]/) &&
+        payload === "="
+      ) {
+        return state;
       }
-      break;
+
+      // to fix the issue of two consecutive minuses - all consecutive minuses changes to plus
+      if (/[--]/g.test(state.expression)) {
+        editedExpression = state.expression;
+        while (editedExpression.includes("--")) {
+          editedExpression = editedExpression.replace("--", "+");
+        }
+      }
+
+      // check expression before eval for only allowed characters
+      if (/[\d./*+-=]*/.test(state.expression) === false) {
+        return state;
+      }
+
+      // check edited expression before eval for only allowed characters
+      if (/[\d./*+-=]*/.test(editedExpression) === false) {
+        return state;
+      }
+
+      editedExpression
+        ? // eslint-disable-next-line
+          (result = parseFloat(eval(editedExpression)))
+        : // eslint-disable-next-line
+          (result = parseFloat(eval(state.expression)));
+      // to compensate for JavaScript floats' computation issue
+      let resultRounded = (
+        Math.round(1000000000000 * result) / 1000000000000
+      ).toString();
+      return {
+        ...state,
+        expression: "",
+        overwrite: true,
+        operandAfterEval: resultRounded,
+        expressionDisplay: `${state.expression}${payload}${resultRounded}`,
+        currentDisplay: resultRounded,
+      };
     }
     default:
-      throw Error("Unknown action: " + actions.type);
+      throw Error("Unknown action: " + type);
   }
 }
 

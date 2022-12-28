@@ -1,8 +1,8 @@
 ## freeCodeCamp - Front End Development Libraries Project
 
-# Build a JavaScript Calculator (Vanilla)
+# Build a JavaScript Calculator
 
-This is a vanilla JavaScript preparation for my React.js solution to the [Build a JavaScript Calculator](https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-javascript-calculator), the fourth of 5 projects to earn the Front End Development Libraries certification. FreeCodeCamp's mission is to help people learn to code for free.
+This is my solution to the [Build a JavaScript Calculator](https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-javascript-calculator), the fourth of 5 projects to earn the Front End Development Libraries certification. FreeCodeCamp's mission is to help people learn to code for free.
 
 ## Table of contents
 
@@ -14,6 +14,7 @@ This is a vanilla JavaScript preparation for my React.js solution to the [Build 
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
@@ -25,28 +26,36 @@ Fulfill the user stories and get all of the tests to pass. You can use any mix o
 
 ### Screenshot
 
-![Desktop layout](./Screenshot.jpg)
+![Desktop layout](./screenshot.jpg)
 
 ### Links
 
-- Solution URL: https://github.com/PavlinaPs/javascript-calculator-vanilla
-- Live Site URL: https://pavlinaps.github.io/javascript-calculator-vanilla/
+- Solution URL: https://github.com/PavlinaPs/javascript-calculator-react
+- Live Site URL: https://pavlinaps.github.io/javascript-calculator-react
 
 ## My process
 
-I've already tried to code this challenge in React.js with useReducer hook but it never worked correctly, so I decided to code it vanilla first and it passes all FreeCodeCamp's tests. And also my husband's and children's fooling around :-)
+It took me forever and several attempts, but it finally passes all FreeCodeCamp tests (and also my husband's and children's fooling around :-)).
+This is my first use of the useReducer hook.
 
 ### Built with
 
-- vanilla JavaScript
+- React.js
 
 ### What I learned
 
-This was a nice JavaScript exercise, let's see if I can code it in React.js
+I learned really a lot and also I'm happy I could rely on my previous JavaScript knowledge. The order of learning seems to be correct.
+useReducer first looked very complicated, but in fact it is not and I can see its advantages in maintaining state.
 
 ### Continued development
 
-I need to improve in React.js.
+I still have a long road ahead of me, learn more hooks, custom hooks, CRUD, APIs, etc.
+
+### Useful resources
+
+- [Learn useReducer In 20 Minutes](https://www.youtube.com/watch?v=kK_Wqx3RnHk) - Web Dev Simplified
+- [The Perfect Beginner React Project](https://www.youtube.com/watch?v=DgRrrOt0Vr8) - Web Dev Simplified
+- [regexr.com](https://regexr.com/) - a great site for testing regular expression
 
 ## Author
 
